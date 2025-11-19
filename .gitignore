@@ -64,4 +64,5 @@ Thumbs.db
 
 # Test output
 *.svg
+!spec/fixtures/**/*.svg
 /output/
