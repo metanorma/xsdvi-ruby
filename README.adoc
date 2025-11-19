@@ -1,0 +1,317 @@
+= XSDVI Ruby
+
+image:https://img.shields.io/gem/v/xsdvi.svg[Gem Version]
+image:https://img.shields.io/badge/license-MIT-blue.svg[License]
+
+== Purpose
+
+XSDVI (XML Schema Definition Visualizer) is a Ruby gem that transforms W3C XML
+Schema (XSD) files into interactive, hierarchical SVG diagrams. It provides a
+visual representation of complex XML Schema structures, making it easier to
+understand schema relationships, element hierarchies, attribute requirements,
+and data type definitions.
+
+The tool parses XSD files and generates SVG diagrams that display:
+
+* Element structures with their types, cardinality, and attributes
+* Compositor relationships (sequence, choice, all)
+* Type hierarchies and inheritance
+* Identity constraints (key, keyref, unique)
+* Namespace information
+* Documentation annotations from the schema
+* Recursive references with loop detection
+
+This is a pure Ruby port of the original Java XsdVi tool, providing the same
+functionality with modern Ruby idioms and gemification for easy integration into
+Ruby projects.
+
+== Features
+
+=== XSD Component Visualization
+
+* Elements and Attributes: Visual boxes showing element names, types, cardinality (min..max occurrences),  required/optional status, and namespace information
+* Compositors: Graphical representation of sequence (ordered), choice (alternatives), and all (unordered) element groups
+* Wildcards: Display of `<any>` and `<anyAttribute>` with namespace constraints and processing modes
+* Identity Constraints: Visualization of key, keyref, unique constraints with their selectors and fields
+* Type Information: Display of simple and complex type definitions, base types, and anonymous types
+
+=== Interactive SVG Output
+
+* Hierarchical Layout: Tree-structure visualization with proper indentation and connections
+* Collapsible/Expandable: JavaScript-enabled expand/collapse functionality for complex schemas (optional)
+* Clickable Elements: Navigate between related schema components
+* Documentation Display: Inline display of `<xs:documentation>` annotations
+* Color-coded Symbols: Different visual styles for elements, attributes, compositors, and constraints
+
+=== Flexible Output Options
+
+* Single Diagram: Generate one SVG showing the entire schema or a specific root element
+* Per-Element Diagrams: Generate separate SVG files for each top-level element
+* Custom Styling: Embed CSS in SVG files or use external stylesheets
+* Output Directory: Organize generated diagrams in custom folder structures
+
+=== Processing Capabilities
+
+* Multiple XSD Files: Process multiple schema files in a single run
+* Loop Detection: Automatically detects and marks recursive element references
+* Namespace Handling: Properly displays and distinguishes multiple namespaces
+* Documentation Extraction: Extracts and formats XSD documentation for display
+* Large Schema Support: Handles complex, real-world schemas with hundreds of elements
+
+== Installation
+
+Add this line to your application's Gemfile:
+
+[source,ruby]
+----
+gem 'xsdvi'
+----
+
+And then execute:
+
+[source,shell]
+----
+bundle install
+----
+
+Or install it yourself as:
+
+[source,shell]
+----
+gem install xsdvi
+----
+
+== Usage
+
+=== Basic usage
+
+Generate an SVG diagram from an XSD file:
+
+[source,shell]
+----
+xsdvi generate schema.xsd
+----
+
+This creates `schema.svg` in the current directory, showing all top-level
+elements and their hierarchical structure.
+
+=== Generate diagram for specific root element
+
+[source,shell]
+----
+xsdvi generate schema.xsd -r UnitsML
+----
+
+This generates a diagram starting from the `UnitsML` element, showing its
+complete structure and all nested elements.
+
+=== Generate separate SVG for each element
+
+[source,shell]
+----
+xsdvi generate schema.xsd -r all -o -p output/diagrams
+----
+
+This creates individual SVG files for each top-level element in the
+`output/diagrams` directory.
+
+=== Command-line options
+
+`-r, --root-node-name NAME`::
+Specify the schema root element name to visualize. Use "all" to generate
+diagrams for all top-level elements. If omitted, generates a complete schema
+diagram showing all elements.
+
+`-o, --one-node-only`::
+Generate diagram showing only the specified element without its children
+(single-level view). Automatically enabled when using `-r all`. This mode hides
+the expand/collapse control buttons.
+
+`-p, --output-path PATH`::
+Specify output directory for generated SVG files. The tool automatically creates
+the directory if it doesn't exist. If omitted, files are created in the current
+directory.
+
+`--embody-style`::
+Embed CSS styling directly in each SVG file (default: true). This creates
+self-contained SVG files that display correctly without external dependencies.
+
+`--generate-style FILE`::
+Generate an external CSS file with the specified name and reference it from SVG
+files. Useful when generating multiple diagrams that should share styling.
+
+`--use-style URL`::
+Reference an existing external CSS file at the specified URL in generated SVG
+files. The CSS file must be accessible when the SVG is viewed.
+
+=== Examples
+
+.Generate full schema diagram with root element
+[example]
+====
+[source,shell]
+----
+xsdvi generate UnitsML-v1.0.xsd -r UnitsML
+----
+
+Creates `UnitsML.svg` showing the complete structure starting from the UnitsML
+root element, including all nested elements, attributes, and constraints.
+====
+
+.Generate diagram for single element only
+[example]
+====
+[source,shell]
+----
+xsdvi generate UnitsML-v1.0.xsd -r Quantity -o
+----
+
+Creates `Quantity.svg` showing only the Quantity element definition without
+expanding its children, useful for focused documentation.
+====
+
+.Generate separate diagrams for all top-level elements
+[example]
+====
+[source,shell]
+----
+xsdvi generate UnitsML-v1.0.xsd -r all -o -p images/SVG
+----
+
+Creates individual SVG files (`Quantity.svg`, `Unit.svg`, etc.) in the
+`images/SVG` directory, one for each top-level element in the schema.
+====
+
+.Generate diagram using external CSS
+[example]
+====
+[source,shell]
+----
+xsdvi generate schema.xsd --generate-style custom.css -p output
+----
+
+Creates `output/schema.svg` and `output/custom.css`, with the SVG referencing
+the external stylesheet. Useful for customizing diagram appearance.
+====
+
+==  Architecture
+
+=== Core components
+
+TreeElement and TreeBuilder:: Manage the tree structure representing the XSD
+schema hierarchy. TreeElement provides parent-child relationships, traversal
+methods, and unique node identification.
+
+XsdHandler:: Parses XSD files using Nokogiri and builds the symbol tree
+structure. Handles all XSD constructs including elements, attributes,
+compositors, wildcards, and identity constraints. Performs loop detection for
+recursive schemas.
+
+Symbol classes::
+14 specialized symbol types representing different XSD constructs:
++
+* Element, Attribute - schema components
+* Choice, Sequence, All - compositors
+* Any, AnyAttribute - wildcards
+* Key, Keyref, Unique - identity constraints
+* Selector, Field - constraint components
+* Loop - recursive reference indicator
+* Schema - root container
+
+SVG::Generator:: Generates SVG output files from the symbol tree. Manages
+layout, styling, resource loading, and recursive symbol drawing. Produces
+interactive diagrams with JavaScript-enabled expand/collapse functionality.
+
+CLI:: Thor-based command-line interface providing easy access to all generation
+options with built-in help and validation.
+
+=== Data flow
+
+[source]
+----
+XSD File → XsdHandler (Nokogiri parsing)
+              ↓
+         Symbol Tree (TreeBuilder)
+              ↓
+  Symbol Processing (prepare_box, calculate dimensions)
+              ↓
+      SVG Generation (Generator.draw)
+              ↓
+         SVG File Output
+----
+
+
+== Differences from Java version
+
+=== Text wrapping
+
+The Ruby implementation uses a custom text wrapping algorithm that produces
+slightly different line breaks compared to Apache Commons Text
+`WordUtils.wrap()`. The Ruby version optimizes for keeping related content
+together when it fits within the line width, while maintaining valid XML
+structure.
+
+Impact: Documentation text may wrap at different character positions, but
+the visual output and functionality remain identical. The Ruby version ensures
+HTML tags and entities in documentation are not broken across lines, improving
+SVG validity.
+
+Example:
+
+Java may break HTML tags mid-structure:
+
+[source,xml]
+----
+<text>See &lt;a</text>
+<text>href="...">text&lt;/a>.</text>
+----
+
+Ruby keeps tags together for better validity:
+
+[source,xml]
+----
+<text>See &lt;a href="...">text&lt;/a>.</text>
+----
+
+Both outputs are functionally equivalent and render correctly in SVG viewers.
+The Ruby approach actually produces more semantically correct output by
+preserving the integrity of embedded HTML elements.
+
+== Development
+
+After checking out the repo, run `bundle install` to install dependencies.
+
+Run tests:
+
+[source,shell]
+----
+bundle exec rspec
+----
+
+Run rubocop:
+
+[source,shell]
+----
+bundle exec rubocop
+----
+
+== Contributing
+
+Bug reports and pull requests are welcome on GitHub at
+https://github.com/metanorma/xsdvi-ruby
+
+== Copyright and license
+
+Copyright https://www.ribose.com[Ribose Inc.]
+
+The gem is available as open source under the Ribose 3-Clause BSD License.
+
+== Acknowledgments
+
+This is a Ruby port of the Metanorma version of the XsdVi tool, which is itself
+a fork of the original XsdVi Java tool created by Václav Slavìtínský. See the
+original project at https://sourceforge.net/projects/xsdvi/
+
+The Ruby port maintains compatibility with the Java version's output format
+while providing a pure Ruby implementation suitable for modern Ruby applications
+and workflows.

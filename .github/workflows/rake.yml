@@ -1,0 +1,16 @@
+name: rake
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches: [main]
+    tags: [v*]
+  pull_request:
+
+jobs:
+  rake:
+    uses: metanorma/ci/.github/workflows/generic-rake.yml@main
+    secrets:
+      pat_token: ${{ secrets.GITHUB_TOKEN }}
