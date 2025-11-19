@@ -27,7 +27,7 @@ Ruby projects.
 
 == Features
 
-=== XSD Component Visualization
+=== XSD component visualization
 
 * Elements and Attributes: Visual boxes showing element names, types, cardinality (min..max occurrences),  required/optional status, and namespace information
 * Compositors: Graphical representation of sequence (ordered), choice (alternatives), and all (unordered) element groups
@@ -35,7 +35,7 @@ Ruby projects.
 * Identity Constraints: Visualization of key, keyref, unique constraints with their selectors and fields
 * Type Information: Display of simple and complex type definitions, base types, and anonymous types
 
-=== Interactive SVG Output
+=== Interactive SVG output
 
 * Hierarchical Layout: Tree-structure visualization with proper indentation and connections
 * Collapsible/Expandable: JavaScript-enabled expand/collapse functionality for complex schemas (optional)
@@ -43,14 +43,14 @@ Ruby projects.
 * Documentation Display: Inline display of `<xs:documentation>` annotations
 * Color-coded Symbols: Different visual styles for elements, attributes, compositors, and constraints
 
-=== Flexible Output Options
+=== Flexible output options
 
 * Single Diagram: Generate one SVG showing the entire schema or a specific root element
 * Per-Element Diagrams: Generate separate SVG files for each top-level element
 * Custom Styling: Embed CSS in SVG files or use external stylesheets
 * Output Directory: Organize generated diagrams in custom folder structures
 
-=== Processing Capabilities
+=== Processing capabilities
 
 * Multiple XSD Files: Process multiple schema files in a single run
 * Loop Detection: Automatically detects and marks recursive element references
@@ -235,8 +235,7 @@ XSD File → XsdHandler (Nokogiri parsing)
               ↓
   Symbol Processing (prepare_box, calculate dimensions)
               ↓
-      SVG Generation (Generator.draw)
-              ↓
+      SVG Gan   ↓
          SVG File Output
 ----
 
