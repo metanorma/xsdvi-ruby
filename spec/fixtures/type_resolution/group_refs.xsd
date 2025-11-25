@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Define a reusable group -->
+  <xs:group name="CommonMetadataGroup">
+    <xs:sequence>
+      <xs:element name="createdBy" type="xs:string"/>
+      <xs:element name="createdDate" type="xs:dateTime"/>
+      <xs:element name="modifiedBy" type="xs:string" minOccurs="0"/>
+      <xs:element name="modifiedDate" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+
+  <!-- Define another group -->
+  <xs:group name="ContactInfoGroup">
+    <xs:sequence>
+      <xs:element name="email" type="xs:string"/>
+      <xs:element name="phone" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
+
+  <!-- Complex type using group references -->
+  <xs:complexType name="DocumentType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="content" type="xs:string"/>
+      <xs:group ref="CommonMetadataGroup"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Element using the complex type -->
+  <xs:element name="Document" type="DocumentType"/>
+
+  <!-- Complex type using multiple group references -->
+  <xs:complexType name="UserType">
+    <xs:sequence>
+      <xs:element name="username" type="xs:string"/>
+      <xs:group ref="ContactInfoGroup"/>
+      <xs:group ref="CommonMetadataGroup"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="User" type="UserType"/>
+</xs:schema>

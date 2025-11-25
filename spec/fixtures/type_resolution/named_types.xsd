@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Complex type definition -->
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <xs:element name="street" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="zipCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Simple type definition -->
+  <xs:simpleType name="CountryCodeType">
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Element using complex type reference -->
+  <xs:element name="Address" type="AddressType"/>
+
+  <!-- Element using simple type reference -->
+  <xs:element name="CountryCode" type="CountryCodeType"/>
+
+  <!-- Nested complex type using another complex type -->
+  <xs:complexType name="PersonType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="age" type="xs:integer"/>
+      <xs:element name="address" type="AddressType"/>
+      <xs:element name="country" type="CountryCodeType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Person" type="PersonType"/>
+</xs:schema>

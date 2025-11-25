@@ -25,6 +25,12 @@ require_relative "xsdvi/utils/writer"
 require_relative "xsdvi/utils/resource_loader"
 require_relative "xsdvi/utils/width_calculator"
 
+# Comparison components
+require_relative "xsdvi/comparison/java_manager"
+require_relative "xsdvi/comparison/metadata_extractor"
+require_relative "xsdvi/comparison/html_generator"
+require_relative "xsdvi/comparison/dual_generator"
+
 module Xsdvi
   class Error < StandardError; end
 end

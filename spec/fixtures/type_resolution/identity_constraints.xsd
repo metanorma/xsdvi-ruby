@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Element with key constraint -->
+  <xs:element name="Inventory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Product" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductID" type="xs:string"/>
+              <xs:element name="Name" type="xs:string"/>
+              <xs:element name="Price" type="xs:decimal"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Order" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderID" type="xs:string"/>
+              <xs:element name="ProductRef" type="xs:string"/>
+              <xs:element name="Quantity" type="xs:integer"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+    <!-- Key constraint: ProductID must be unique -->
+    <xs:key name="ProductKey">
+      <xs:selector xpath="Product"/>
+      <xs:field xpath="ProductID"/>
+    </xs:key>
+
+    <!-- Keyref constraint: ProductRef must reference existing ProductID -->
+    <xs:keyref name="ProductReference" refer="ProductKey">
+      <xs:selector xpath="Order"/>
+      <xs:field xpath="ProductRef"/>
+    </xs:keyref>
+
+    <!-- Unique constraint: OrderID must be unique -->
+    <xs:unique name="OrderUnique">
+      <xs:selector xpath="Order"/>
+      <xs:field xpath="OrderID"/>
+    </xs:unique>
+  </xs:element>
+
+  <!-- Element with multiple field constraint -->
+  <xs:element name="Catalog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Category" type="xs:string"/>
+              <xs:element name="ItemID" type="xs:string"/>
+              <xs:element name="Description" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+    <!-- Composite key using multiple fields -->
+    <xs:key name="ItemKey">
+      <xs:selector xpath="Item"/>
+      <xs:field xpath="Category"/>
+      <xs:field xpath="ItemID"/>
+    </xs:key>
+  </xs:element>
+
+  <!-- Element with nested constraints -->
+  <xs:element name="Library">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Author" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AuthorID" type="xs:string"/>
+              <xs:element name="Name" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Book" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ISBN" type="xs:string"/>
+              <xs:element name="Title" type="xs:string"/>
+              <xs:element name="AuthorRef" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:key name="AuthorKey">
+      <xs:selector xpath="Author"/>
+      <xs:field xpath="AuthorID"/>
+    </xs:key>
+
+    <xs:unique name="ISBNUnique">
+      <xs:selector xpath="Book"/>
+      <xs:field xpath="ISBN"/>
+    </xs:unique>
+
+    <xs:keyref name="AuthorReference" refer="AuthorKey">
+      <xs:selector xpath="Book"/>
+      <xs:field xpath="AuthorRef"/>
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

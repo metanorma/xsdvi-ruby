@@ -50,6 +50,7 @@ module Xsdvi
         print(script)
 
         print_defs(embody_style, true)
+        print("")
         print(load_resource("svg/menu_buttons.svg")) unless hide_menu_buttons
       end
 

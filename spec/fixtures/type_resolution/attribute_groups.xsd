@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Define a reusable attribute group -->
+  <xs:attributeGroup name="CommonAttributesGroup">
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="version" type="xs:string" use="optional"/>
+    <xs:attribute name="lang" type="xs:language" use="optional" default="en"/>
+  </xs:attributeGroup>
+
+  <!-- Another attribute group -->
+  <xs:attributeGroup name="DisplayAttributesGroup">
+    <xs:attribute name="visible" type="xs:boolean" default="true"/>
+    <xs:attribute name="priority" type="xs:integer" default="0"/>
+  </xs:attributeGroup>
+
+  <!-- Nested attribute group referencing another -->
+  <xs:attributeGroup name="ExtendedAttributesGroup">
+    <xs:attributeGroup ref="CommonAttributesGroup"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:attributeGroup>
+
+  <!-- Complex type using attribute group references -->
+  <xs:complexType name="ArticleType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="body" type="xs:string"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="CommonAttributesGroup"/>
+    <xs:attributeGroup ref="DisplayAttributesGroup"/>
+  </xs:complexType>
+
+  <xs:element name="Article" type="ArticleType"/>
+
+  <!-- Complex type using nested attribute group -->
+  <xs:complexType name="SectionType">
+    <xs:sequence>
+      <xs:element name="heading" type="xs:string"/>
+      <xs:element name="content" type="xs:string"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="ExtendedAttributesGroup"/>
+  </xs:complexType>
+
+  <xs:element name="Section" type="SectionType"/>
+</xs:schema>
