@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Global element definitions -->
+  <xs:element name="GlobalTitle" type="xs:string"/>
+  <xs:element name="GlobalDescription" type="xs:string"/>
+  <xs:element name="GlobalDate" type="xs:dateTime"/>
+
+  <!-- Global element with complex type -->
+  <xs:element name="GlobalAuthor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="firstName" type="xs:string"/>
+        <xs:element name="lastName" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Complex type referencing global elements -->
+  <xs:complexType name="BookType">
+    <xs:sequence>
+      <xs:element ref="GlobalTitle"/>
+      <xs:element ref="GlobalDescription"/>
+      <xs:element ref="GlobalAuthor" maxOccurs="unbounded"/>
+      <xs:element ref="GlobalDate"/>
+      <xs:element name="isbn" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Book" type="BookType"/>
+
+  <!-- Multiple references to the same global element -->
+  <xs:complexType name="ArticleType">
+    <xs:sequence>
+      <xs:element ref="GlobalTitle"/>
+      <xs:element ref="GlobalAuthor"/>
+      <xs:element ref="GlobalDate"/>
+      <xs:element name="journal" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Article" type="ArticleType"/>
+
+  <!-- Element with cardinality -->
+  <xs:element name="GlobalKeyword" type="xs:string"/>
+
+  <xs:complexType name="DocumentType">
+    <xs:sequence>
+      <xs:element ref="GlobalTitle"/>
+      <xs:element ref="GlobalKeyword" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Document" type="DocumentType"/>
+</xs:schema>

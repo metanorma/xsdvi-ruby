@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Circular reference case: Node can contain other Nodes -->
+  <xs:element name="Node">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:string"/>
+        <xs:element name="value" type="xs:string"/>
+        <xs:element ref="Node" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Circular type reference -->
+  <xs:complexType name="TreeNodeType">
+    <xs:sequence>
+      <xs:element name="data" type="xs:string"/>
+      <xs:element name="children" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="child" type="TreeNodeType" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="TreeNode" type="TreeNodeType"/>
+
+  <!-- Mutual circular reference: A references B, B references A -->
+  <xs:element name="Parent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="parentId" type="xs:string"/>
+        <xs:element ref="Child" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Child">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="childId" type="xs:string"/>
+        <xs:element ref="Parent" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Self-referencing through type -->
+  <xs:complexType name="RecursiveType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="next" type="RecursiveType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="RecursiveElement" type="RecursiveType"/>
+
+  <!-- Deep circular reference through multiple levels -->
+  <xs:complexType name="LevelOneType">
+    <xs:sequence>
+      <xs:element name="levelOneName" type="xs:string"/>
+      <xs:element name="levelTwo" type="LevelTwoType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LevelTwoType">
+    <xs:sequence>
+      <xs:element name="levelTwoName" type="xs:string"/>
+      <xs:element name="levelThree" type="LevelThreeType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LevelThreeType">
+    <xs:sequence>
+      <xs:element name="levelThreeName" type="xs:string"/>
+      <xs:element name="backToLevelOne" type="LevelOneType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="LevelOne" type="LevelOneType"/>
+</xs:schema>

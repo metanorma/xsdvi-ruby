@@ -29,7 +29,7 @@ module Xsdvi
 
         def draw
           print("<a href=\"#\" onclick=\"window.parent.location.href = " \
-                "window.parent.location.href.split('#')[0] + " \
+                "window.parent.location.href.split('#')[0]  + " \
                 "'#element_#{name}'\">")
 
           process_description

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Base complex type -->
+  <xs:complexType name="BasePersonType">
+    <xs:sequence>
+      <xs:element name="firstName" type="xs:string"/>
+      <xs:element name="lastName" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+  </xs:complexType>
+
+  <!-- Extension via complexContent -->
+  <xs:complexType name="EmployeeType">
+    <xs:complexContent>
+      <xs:extension base="BasePersonType">
+        <xs:sequence>
+          <xs:element name="employeeId" type="xs:string"/>
+          <xs:element name="department" type="xs:string"/>
+          <xs:element name="salary" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="status" type="xs:string" default="active"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Employee" type="EmployeeType"/>
+
+  <!-- Restriction via complexContent -->
+  <xs:complexType name="RestrictedPersonType">
+    <xs:complexContent>
+      <xs:restriction base="BasePersonType">
+        <xs:sequence>
+          <xs:element name="firstName" type="xs:string"/>
+          <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="RestrictedPerson" type="RestrictedPersonType"/>
+
+  <!-- Base simple type -->
+  <xs:simpleType name="BaseStringType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Extension via simpleContent -->
+  <xs:complexType name="ExtendedStringType">
+    <xs:simpleContent>
+      <xs:extension base="BaseStringType">
+        <xs:attribute name="lang" type="xs:language" default="en"/>
+        <xs:attribute name="format" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="ExtendedString" type="ExtendedStringType"/>
+
+  <!-- Restriction via simpleContent -->
+  <xs:complexType name="RestrictedStringType">
+    <xs:simpleContent>
+      <xs:restriction base="ExtendedStringType">
+        <xs:minLength value="5"/>
+        <xs:maxLength value="100"/>
+        <xs:attribute name="lang" type="xs:language" use="required"/>
+        <xs:attribute name="format" type="xs:string" fixed="text"/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="RestrictedString" type="RestrictedStringType"/>
+
+  <!-- Multi-level inheritance -->
+  <xs:complexType name="ManagerType">
+    <xs:complexContent>
+      <xs:extension base="EmployeeType">
+        <xs:sequence>
+          <xs:element name="teamSize" type="xs:integer"/>
+          <xs:element name="budget" type="xs:decimal"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Manager" type="ManagerType"/>
+</xs:schema>

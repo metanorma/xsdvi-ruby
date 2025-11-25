@@ -155,10 +155,11 @@ module Xsdvi
           wrapped_string = word_utils_wrap(desc_string, wrap_length)
           wrapped_lines = wrapped_string.split("\n")
           strings_with_breaks.concat(wrapped_lines)
+          # Match Java bug: accumulate TOTAL size, not just new lines
+          @additional_height += y_shift * strings_with_breaks.size
         end
 
         @description_string_array = strings_with_breaks
-        @additional_height = y_shift * strings_with_breaks.size
 
         prev_y = Symbol.prev_y_position || 0
         curr_y = y_position || 0
@@ -187,47 +188,55 @@ module Xsdvi
 
       # Apache Commons WordUtils.wrap(str, wrapLength, newLineStr, wrapLongWords)
       # Wraps text at wrapLength, inserting newLineStr, optionally breaking long words
+      # Java WordUtils processes multi-line input by handling each line separately
       def word_utils_wrap(input, wrap_length)
         return input if input.nil? || wrap_length < 1
 
-        input_line_length = input.length
-        return input if input_line_length <= wrap_length
+        # Split by existing newlines first (like Java WordUtils does)
+        input_lines = input.split("\n", -1)  # -1 to preserve trailing empty strings
+        result_lines = []
 
-        result = []
-        offset = 0
-
-        while offset < input_line_length
-          # Handle existing newline in input
-          space_idx = input.index("\n", offset)
-          if space_idx && space_idx < wrap_length + offset
-            # There's a newline before wrap point
-            result << input[offset...space_idx]
-            offset = space_idx + 1
+        input_lines.each do |line|
+          # Handle empty lines
+          if line.empty?
+            result_lines << ""
             next
           end
 
-          # Find wrap point
-          if input_line_length - offset <= wrap_length
-            # Rest of string fits
-            result << input[offset..]
-            break
+          # Skip wrapping if line is strictly shorter than wrap_length
+          # Apache Commons only skips if length < wrap_length, not <=
+          if line.length < wrap_length
+            result_lines << line
+            next
           end
 
-          # Need to wrap - find last space before wrap_length
-          space_idx = input.rindex(" ", offset + wrap_length)
+          # Wrap this line
+          offset = 0
+          line_length = line.length
 
-          if space_idx && space_idx >= offset
-            # Found space to break at
-            result << input[offset...space_idx]
-            offset = space_idx + 1
-          else
-            # No space found - break at wrap_length (wrapLongWords=true)
-            result << input[offset...(offset + wrap_length)]
-            offset += wrap_length
+          while offset < line_length
+            # Rest of line fits?
+            if line_length - offset <= wrap_length
+              result_lines << line[offset..]
+              break
+            end
+
+            # Find last space before wrap point
+            space_idx = line.rindex(" ", offset + wrap_length)
+
+            if space_idx && space_idx >= offset
+              # Found space to break at
+              result_lines << line[offset...space_idx]
+              offset = space_idx + 1
+            else
+              # No space found - break at wrap_length (wrapLongWords=true)
+              result_lines << line[offset...(offset + wrap_length)]
+              offset += wrap_length
+            end
           end
         end
 
-        result.join("\n")
+        result_lines.join("\n")
       end
     end
   end
