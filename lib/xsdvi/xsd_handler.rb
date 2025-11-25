@@ -441,18 +441,40 @@ module Xsdvi
       namespace = attr_node["namespace"]
       symbol.namespace = namespace if namespace && namespace != schema_namespace
 
-      # Strip xsd: prefix from type display
+      # Determine type - either from type attribute or inline simpleType restriction
+      type_value = nil
+      type_prefix = "type"
+
       if attr_node["type"]
         type_value = attr_node["type"]
         type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
-        symbol.type = "type: #{type_value}"
+      else
+        # Check for inline simpleType definition
+        simple_type = attr_node.at_xpath("xs:simpleType", "xs" => XSD_NAMESPACE)
+        if simple_type
+          restriction = simple_type.at_xpath("xs:restriction", "xs" => XSD_NAMESPACE)
+          if restriction && restriction["base"]
+            type_value = restriction["base"]
+            type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
+            type_prefix = "base"  # Use "base:" for inline restrictions
+          end
+        end
       end
+
+      symbol.type = "#{type_prefix}: #{type_value}" if type_value
 
       symbol.required = attr_node["use"] == "required"
 
       # Capture default or fixed values
       if attr_node["default"]
-        symbol.constraint = "default: #{attr_node['default']}"
+        default_value = attr_node['default']
+
+        # Format default value for double type: 0 becomes 0.0E1
+        if type_value == "double" && (default_value == "0" || default_value.to_f == 0.0)
+          default_value = "0.0E1"
+        end
+
+        symbol.constraint = "default: #{default_value}"
       elsif attr_node["fixed"]
         symbol.constraint = "fixed: #{attr_node['fixed']}"
       end
