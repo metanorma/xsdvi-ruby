@@ -452,11 +452,20 @@ module Xsdvi
         # Check for inline simpleType definition
         simple_type = attr_node.at_xpath("xs:simpleType", "xs" => XSD_NAMESPACE)
         if simple_type
-          restriction = simple_type.at_xpath("xs:restriction", "xs" => XSD_NAMESPACE)
-          if restriction && restriction["base"]
-            type_value = restriction["base"]
-            type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
-            type_prefix = "base"  # Use "base:" for inline restrictions
+          # Check for union type first
+          union = simple_type.at_xpath("xs:union", "xs" => XSD_NAMESPACE)
+          if union
+            # Union types have base type of anySimpleType
+            type_value = "anySimpleType"
+            type_prefix = "base"
+          else
+            # Check for restriction
+            restriction = simple_type.at_xpath("xs:restriction", "xs" => XSD_NAMESPACE)
+            if restriction && restriction["base"]
+              type_value = restriction["base"]
+              type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
+              type_prefix = "base"
+            end
           end
         end
       end
