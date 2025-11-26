@@ -532,16 +532,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_1_1_1_1_1_1_3_2' class='box' transform='translate(2003,405)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='2003'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -1782,16 +1783,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_1_1_2_1_1_1_2_2' class='box' transform='translate(2003,4594)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='2003'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -2124,16 +2126,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_1_1_3_1_1_1_2_2' class='box' transform='translate(2003,5659)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='2003'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -3169,16 +3172,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_1_1_5_1_1_1_2_2' class='box' transform='translate(2003,9209)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='2003'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -3416,16 +3420,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_2_1_1_1_3_2' class='box' transform='translate(1508,9919)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1508'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -4698,16 +4703,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_3_1_3_2' class='box' transform='translate(1013,14321)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1013'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -5952,16 +5958,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_6_2' class='box' transform='translate(518,18723)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='518'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -7866,16 +7873,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_23_1_1_1_2_2' class='box' transform='translate(1508,25184)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1508'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -8179,16 +8187,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_24_1_2_2' class='box' transform='translate(1013,26249)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1013'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -8465,16 +8474,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_26_2' class='box' transform='translate(518,27314)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='518'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -8794,16 +8804,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_31_1_1_1_2_2' class='box' transform='translate(1508,28308)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1508'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -9193,16 +9204,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_32_1_2_2' class='box' transform='translate(1013,29728)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1013'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -9563,16 +9575,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_34_2' class='box' transform='translate(518,31148)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='518'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -11680,16 +11693,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_51_1_1_1_2_2' class='box' transform='translate(1508,38603)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1508'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -11840,16 +11854,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_52_1_2_2' class='box' transform='translate(1013,39100)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='1013'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
@@ -11973,16 +11988,17 @@ line, polyline, polygon {fill: none; stroke: black;}
 </g>
 
 <g id='_1_54_2' class='box' transform='translate(518,39597)' data-desc-height='70' data-desc-height-rest='70' data-desc-x='518'>
-<rect class='shadow' x='3' y='3' width='93' height='46' rx='9'/>
-<rect class='boxattribute1' x='0' y='0' width='93' height='46' rx='9'
+<rect class='shadow' x='3' y='3' width='129' height='46' rx='9'/>
+<rect class='boxattribute1' x='0' y='0' width='129' height='46' rx='9'
 />
 <text class='strong' x='5' y='27'><tspan class='big'>@</tspan> type</text>
+<text class='visible' x='5' y='41'>base: anySimpleType</text>
 <text x='5' y='59'></text>
 <text x='5' y='73' class='desc'>Type of symbol</text>
 <text x='5' y='87' class='desc'>representation. </text>
-<text x='5' y='101' class='desc'>Examples include</text>
-<text x='5' y='115' class='desc'>ASCII, unicode,</text>
-<text x='5' y='129' class='desc'>HTML, and MathML.</text>
+<text x='5' y='101' class='desc'>Examples include ASCII,</text>
+<text x='5' y='115' class='desc'>unicode, HTML, and</text>
+<text x='5' y='129' class='desc'>MathML.</text>
 <line class='connection' x1='-35' y1='23' x2='0' y2='23'/>
 </g>
 
