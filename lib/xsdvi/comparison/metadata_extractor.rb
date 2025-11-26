@@ -10,13 +10,13 @@ module Xsdvi
       # @param svg_dir [String] Directory containing SVG files
       # @return [Hash] Metadata including file count, sizes, and symbol counts
       def extract(svg_dir)
-        files = Dir.glob(File.join(svg_dir, "*.svg")).sort
+        files = Dir.glob(File.join(svg_dir, "*.svg"))
 
         {
           file_count: files.length,
           total_size: files.sum { |f| File.size(f) },
           total_size_kb: (files.sum { |f| File.size(f) } / 1024.0).round(1),
-          files: files.map { |f| analyze_file(f) }
+          files: files.map { |f| analyze_file(f) },
         }
       end
 
@@ -51,7 +51,7 @@ module Xsdvi
           fields: count_by_class(doc, "boxfield"),
           loops: count_by_class(doc, "boxloop"),
           schemas: count_by_class(doc, "boxschema"),
-          total_symbols: count_all_boxes(doc)
+          total_symbols: count_all_boxes(doc),
         }
       end
 

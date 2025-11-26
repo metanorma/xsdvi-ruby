@@ -62,9 +62,7 @@ module Xsdvi
 
         begin
           URI.open(JAR_URL, "rb") do |remote|
-            File.open(@jar_path, "wb") do |local|
-              local.write(remote.read)
-            end
+            File.binwrite(@jar_path, remote.read)
           end
         rescue StandardError => e
           raise "Failed to download Java XsdVi: #{e.message}"

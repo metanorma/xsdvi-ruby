@@ -193,7 +193,7 @@ module Xsdvi
         return input if input.nil? || wrap_length < 1
 
         # Split by existing newlines first (like Java WordUtils does)
-        input_lines = input.split("\n", -1)  # -1 to preserve trailing empty strings
+        input_lines = input.split("\n", -1) # -1 to preserve trailing empty strings
         result_lines = []
 
         input_lines.each do |line|

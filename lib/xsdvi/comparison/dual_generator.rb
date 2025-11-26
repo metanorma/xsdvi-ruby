@@ -48,7 +48,7 @@ module Xsdvi
           output_dir: @output_dir,
           html_file: html_file,
           java: java_metadata,
-          ruby: ruby_metadata
+          ruby: ruby_metadata,
         }
       end
 
@@ -113,14 +113,16 @@ module Xsdvi
 
         # Generate output file(s)
         if @root == "all"
-          generate_ruby_all_elements(xsd_handler, svg_generator, builder, writer_helper)
+          generate_ruby_all_elements(xsd_handler, svg_generator, builder,
+                                     writer_helper)
         else
           generate_ruby_single(svg_generator, builder, writer_helper)
         end
       end
 
       # Generate Ruby output for all elements
-      def generate_ruby_all_elements(xsd_handler, svg_generator, builder, writer_helper)
+      def generate_ruby_all_elements(xsd_handler, svg_generator, builder,
+writer_helper)
         doc = Nokogiri::XML(File.read(@xsd_file))
         element_names = xsd_handler.get_elements_names(doc)
 
@@ -172,7 +174,7 @@ module Xsdvi
           @output_dir,
           java_meta,
           ruby_meta,
-          schema_name: File.basename(@xsd_file, ".xsd")
+          schema_name: File.basename(@xsd_file, ".xsd"),
         )
       end
 

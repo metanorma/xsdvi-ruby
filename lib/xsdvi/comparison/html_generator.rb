@@ -6,7 +6,8 @@ module Xsdvi
   module Comparison
     # Generates HTML comparison page
     class HtmlGenerator
-      TEMPLATE_PATH = File.join(__dir__, "../../../resources/comparison/template.html")
+      TEMPLATE_PATH = File.join(__dir__,
+                                "../../../resources/comparison/template.html")
 
       # Generate HTML comparison page
       # @param output_dir [String] Output directory path
@@ -22,8 +23,11 @@ module Xsdvi
           .gsub("{{SCHEMA_NAME}}", options[:schema_name] || "Schema")
           .gsub("{{JAVA_METADATA}}", format_metadata_json(java_metadata))
           .gsub("{{RUBY_METADATA}}", format_metadata_json(ruby_metadata))
-          .gsub("{{STATS_TABLE}}", generate_stats_table(java_metadata, ruby_metadata))
-          .gsub("{{ELEMENT_SELECTOR}}", generate_element_selector(java_metadata, ruby_metadata))
+          .gsub("{{STATS_TABLE}}", generate_stats_table(java_metadata,
+                                                        ruby_metadata))
+          .gsub("{{ELEMENT_SELECTOR}}", generate_element_selector(
+                                          java_metadata, ruby_metadata
+                                        ))
           .gsub("{{IS_MULTI_FILE}}", (java_metadata[:file_count] > 1).to_s)
 
         output_file = File.join(output_dir, "comparison.html")
@@ -53,7 +57,7 @@ module Xsdvi
           "Files",
           java_meta[:file_count],
           ruby_meta[:file_count],
-          java_meta[:file_count] == ruby_meta[:file_count]
+          java_meta[:file_count] == ruby_meta[:file_count],
         )
 
         # Total size
@@ -61,7 +65,7 @@ module Xsdvi
           "Total Size",
           "#{java_meta[:total_size_kb]} KB",
           "#{ruby_meta[:total_size_kb]} KB",
-          (java_meta[:total_size_kb] - ruby_meta[:total_size_kb]).abs < 1
+          (java_meta[:total_size_kb] - ruby_meta[:total_size_kb]).abs < 1,
         )
 
         # Generation time (if available)
@@ -70,7 +74,7 @@ module Xsdvi
             "Generation Time",
             "#{java_meta[:generation_time]}s",
             "#{ruby_meta[:generation_time]}s",
-            nil
+            nil,
           )
         end
 
@@ -86,16 +90,17 @@ module Xsdvi
           ["Keys", :keys],
           ["Key References", :keyrefs],
           ["Unique Constraints", :uniques],
-          ["Loops", :loops]
+          ["Loops", :loops],
         ]
 
         symbol_types.each do |label, key|
           java_total = sum_symbol_count(java_meta[:files], key)
           ruby_total = sum_symbol_count(ruby_meta[:files], key)
 
-          next if java_total == 0 && ruby_total == 0
+          next if java_total.zero? && ruby_total.zero?
 
-          rows << table_row(label, java_total, ruby_total, java_total == ruby_total)
+          rows << table_row(label, java_total, ruby_total,
+                            java_total == ruby_total)
         end
 
         <<~HTML
@@ -154,7 +159,7 @@ module Xsdvi
       # @param java_meta [Hash] Java metadata
       # @param ruby_meta [Hash] Ruby metadata
       # @return [String] HTML select element or empty string
-      def generate_element_selector(java_meta, ruby_meta)
+      def generate_element_selector(java_meta, _ruby_meta)
         return "" if java_meta[:file_count] <= 1
 
         options = java_meta[:files].each_with_index.map do |file, index|

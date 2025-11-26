@@ -97,7 +97,8 @@ module Xsdvi
     end
 
     def collect_attribute_group_definitions(doc)
-      doc.xpath("//xs:attributeGroup[@name]", "xs" => XSD_NAMESPACE).each do |node|
+      doc.xpath("//xs:attributeGroup[@name]",
+                "xs" => XSD_NAMESPACE).each do |node|
         name = node["name"]
         @attribute_groups[name] = node
       end
@@ -250,9 +251,9 @@ module Xsdvi
     def process_complex_type_node(complex_type_node)
       # Phase 6: Check for complexContent or simpleContent first
       complex_content = complex_type_node.at_xpath("xs:complexContent",
-                                                    "xs" => XSD_NAMESPACE)
-      simple_content = complex_type_node.at_xpath("xs:simpleContent",
                                                    "xs" => XSD_NAMESPACE)
+      simple_content = complex_type_node.at_xpath("xs:simpleContent",
+                                                  "xs" => XSD_NAMESPACE)
 
       if complex_content
         process_complex_content(complex_content)
@@ -360,7 +361,8 @@ module Xsdvi
       end
 
       # Process group references (Phase 3)
-      sequence_node.xpath("xs:group[@ref]", "xs" => XSD_NAMESPACE).each do |group|
+      sequence_node.xpath("xs:group[@ref]",
+                          "xs" => XSD_NAMESPACE).each do |group|
         process_group_ref(group["ref"])
       end
 
@@ -421,7 +423,7 @@ module Xsdvi
                                 when "skip" then SVG::Symbol::PC_SKIP
                                 when "lax" then SVG::Symbol::PC_LAX
                                 when "strict" then SVG::Symbol::PC_STRICT
-                                else SVG::Symbol::PC_LAX  # Default is lax for anyType
+                                else SVG::Symbol::PC_LAX # Default is lax for anyType
                                 end
       symbol.cardinality = get_cardinality(any_node)
       symbol.description = extract_documentation(any_node)
@@ -447,7 +449,10 @@ module Xsdvi
 
       if attr_node["type"]
         type_value = attr_node["type"]
-        type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
+        if type_value.start_with?("xsd:")
+          type_value = type_value.sub(/^xsd:/,
+                                      "")
+        end
       else
         # Check for inline simpleType definition
         simple_type = attr_node.at_xpath("xs:simpleType", "xs" => XSD_NAMESPACE)
@@ -460,10 +465,14 @@ module Xsdvi
             type_prefix = "base"
           else
             # Check for restriction
-            restriction = simple_type.at_xpath("xs:restriction", "xs" => XSD_NAMESPACE)
+            restriction = simple_type.at_xpath("xs:restriction",
+                                               "xs" => XSD_NAMESPACE)
             if restriction && restriction["base"]
               type_value = restriction["base"]
-              type_value = type_value.sub(/^xsd:/, "") if type_value.start_with?("xsd:")
+              if type_value.start_with?("xsd:")
+                type_value = type_value.sub(/^xsd:/,
+                                            "")
+              end
               type_prefix = "base"
             end
           end
@@ -476,7 +485,7 @@ module Xsdvi
 
       # Capture default or fixed values
       if attr_node["default"]
-        default_value = attr_node['default']
+        default_value = attr_node["default"]
 
         # Format default value for double type: 0 becomes 0.0E1
         if type_value == "double" && (default_value == "0" || default_value.to_f == 0.0)
@@ -510,21 +519,21 @@ module Xsdvi
       if prefix == "xml"
         # W3C XML namespace
         symbol.namespace = "http://www.w3.org/XML/1998/namespace"
-        symbol.name = local_name  # Just "lang" or "id", not "xml:lang" or "xml:id"
+        symbol.name = local_name # Just "lang" or "id", not "xml:lang" or "xml:id"
 
         # Set type based on specific xml: attribute
-        case local_name
-        when "id"
-          symbol.type = "type: ID"
-        when "lang"
-          symbol.type = "base: anySimpleType"
-        when "space"
-          symbol.type = "type: NCName"
-        when "base"
-          symbol.type = "type: anyURI"
-        else
-          symbol.type = "base: anySimpleType"
-        end
+        symbol.type = case local_name
+                      when "id"
+                        "type: ID"
+                      when "lang"
+                        "base: anySimpleType"
+                      when "space"
+                        "type: NCName"
+                      when "base"
+                        "type: anyURI"
+                      else
+                        "base: anySimpleType"
+                      end
       else
         # Regular attribute reference - would need to look up in schema
         symbol.name = local_name
@@ -549,7 +558,7 @@ module Xsdvi
                                 when "skip" then SVG::Symbol::PC_SKIP
                                 when "lax" then SVG::Symbol::PC_LAX
                                 when "strict" then SVG::Symbol::PC_STRICT
-                                else SVG::Symbol::PC_LAX  # Default is lax for anyType
+                                else SVG::Symbol::PC_LAX # Default is lax for anyType
                                 end
       symbol.description = extract_documentation(any_attr_node)
       builder.append_child(symbol)
@@ -597,7 +606,8 @@ module Xsdvi
       end
 
       # Process nested attribute group references (can be recursive)
-      group_node.xpath("xs:attributeGroup[@ref]", "xs" => XSD_NAMESPACE).each do |nested|
+      group_node.xpath("xs:attributeGroup[@ref]",
+                       "xs" => XSD_NAMESPACE).each do |nested|
         process_attribute_group_ref(nested["ref"])
       end
     end
@@ -631,7 +641,7 @@ module Xsdvi
 
     def get_cardinality(node)
       min_occurs = node["minOccurs"]&.to_i || 1
-      max_occurs_str = node["maxOccurs"] || "1"  # XSD default is "1" when not specified
+      max_occurs_str = node["maxOccurs"] || "1" # XSD default is "1" when not specified
 
       return nil if min_occurs == 1 && max_occurs_str == "1"
 
@@ -645,7 +655,7 @@ module Xsdvi
 
     def extract_documentation(node)
       docs = node.xpath(
-        "./xs:annotation/xs:documentation",  # Changed from .// to ./ (direct children only)
+        "./xs:annotation/xs:documentation", # Changed from .// to ./ (direct children only)
         "xs" => XSD_NAMESPACE,
       )
       # Use inner_html to preserve XML entities like &lt; and &gt;
@@ -724,7 +734,8 @@ module Xsdvi
       builder.append_child(symbol)
 
       # Process selector
-      selector_node = constraint_node.at_xpath("xs:selector", "xs" => XSD_NAMESPACE)
+      selector_node = constraint_node.at_xpath("xs:selector",
+                                               "xs" => XSD_NAMESPACE)
       if selector_node
         selector_symbol = SVG::Symbols::Selector.new
         selector_symbol.xpath = selector_node["xpath"]
@@ -733,7 +744,8 @@ module Xsdvi
       end
 
       # Process field(s)
-      constraint_node.xpath("xs:field", "xs" => XSD_NAMESPACE).each do |field_node|
+      constraint_node.xpath("xs:field",
+                            "xs" => XSD_NAMESPACE).each do |field_node|
         field_symbol = SVG::Symbols::Field.new
         field_symbol.xpath = field_node["xpath"]
         builder.append_child(field_symbol)
