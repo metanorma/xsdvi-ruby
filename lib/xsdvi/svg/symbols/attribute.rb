@@ -51,7 +51,7 @@ module Xsdvi
           calc.new_width(15, namespace)
           calc.new_width(15, type)
           calc.new_width(15, 13)
-          calc.new_width(15, constraint)  # Constraint includes "default: " or "fixed: " prefix
+          calc.new_width(15, constraint) # Constraint includes "default: " or "fixed: " prefix
           calc.width
         end
 

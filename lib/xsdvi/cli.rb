@@ -140,16 +140,16 @@ module Xsdvi
         puts "HTML comparison:  #{result[:html_file]}"
         puts ""
 
-        if result[:java][:file_count]
+        if result[:java][:file_count] && result[:java][:generation_time] && result[:java][:generation_time]
           puts "Java:  #{result[:java][:total_size_kb]} KB, " \
                "#{result[:java][:file_count]} file(s), " \
-               "#{result[:java][:generation_time]}s" if result[:java][:generation_time]
+               "#{result[:java][:generation_time]}s"
         end
 
-        if result[:ruby][:file_count]
+        if result[:ruby][:file_count] && result[:ruby][:generation_time] && result[:ruby][:generation_time]
           puts "Ruby:  #{result[:ruby][:total_size_kb]} KB, " \
                "#{result[:ruby][:file_count]} file(s), " \
-               "#{result[:ruby][:generation_time]}s" if result[:ruby][:generation_time]
+               "#{result[:ruby][:generation_time]}s"
         end
 
         puts ""
@@ -200,7 +200,7 @@ module Xsdvi
         output_file = generate_output_filename(
           input,
           elem_name,
-          true,  # one_node_only
+          true, # one_node_only
           output_path,
         )
 

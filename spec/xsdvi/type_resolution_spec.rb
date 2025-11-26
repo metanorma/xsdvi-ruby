@@ -10,7 +10,7 @@ RSpec.describe "Type Resolution" do
   end
 
   after do
-    FileUtils.rm_f(temp_output) if File.exist?(temp_output)
+    FileUtils.rm_f(temp_output)
   end
 
   # Helper method to process XSD file and return root
