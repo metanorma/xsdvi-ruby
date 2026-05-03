@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "nokogiri"
+require "set"
 
 module Xsdvi
   # Handles XSD parsing and tree building
@@ -23,6 +24,10 @@ module Xsdvi
       @model_groups = {}       # QName => group node
       @attribute_groups = {}   # QName => attributeGroup node
       @elements = {}           # QName => element node (for refs)
+
+      # Type extension/restriction chain tracking (prevents stack overflow)
+      @type_depth = 0
+      @type_ancestors = Set.new
     end
 
     def process_file(file_path)
@@ -298,7 +303,10 @@ module Xsdvi
       # Process base type first (inherit content model)
       if (base = extension_node["base"])
         base_type = resolve_type(base)
-        process_complex_type_node(base_type) if base_type && base_type.name == "complexType"
+        if base_type && base_type.name == "complexType" && type_chain_enter(base)
+          process_complex_type_node(base_type)
+          type_chain_exit(base)
+        end
       end
 
       # Then process extension's own content
@@ -310,7 +318,10 @@ module Xsdvi
       # Process base type first (inherit and potentially restrict content model)
       if (base = restriction_node["base"])
         base_type = resolve_type(base)
-        process_complex_type_node(base_type) if base_type && base_type.name == "complexType"
+        if base_type && base_type.name == "complexType" && type_chain_enter(base)
+          process_complex_type_node(base_type)
+          type_chain_exit(base)
+        end
       end
 
       # Then process restriction's own content
@@ -753,6 +764,22 @@ module Xsdvi
       end
 
       builder.level_up
+    end
+
+    MAX_TYPE_DEPTH = 100
+
+    def type_chain_enter(type_name)
+      return false if @type_depth >= MAX_TYPE_DEPTH
+      return false if @type_ancestors.include?(type_name)
+
+      @type_depth += 1
+      @type_ancestors.add(type_name)
+      true
+    end
+
+    def type_chain_exit(type_name)
+      @type_depth -= 1
+      @type_ancestors.delete(type_name)
     end
   end
 end
